@@ -11,5 +11,10 @@ public class Operations {
 			String password1) {
 		return 0;
 	}
+	
+	public boolean login(String emailId, String password)
+	{
+		return true;
+	}
 
 }

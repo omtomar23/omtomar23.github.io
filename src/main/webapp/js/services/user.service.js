@@ -71,7 +71,7 @@
 
         function Login(emailId,password) {
             return $http({
-                url: '/tgtsfans/login',
+                url: '/tailerManager/login',
                 method: 'POST',
                 data: $.param({"command":"login","emailId":emailId,"password":password}),
                 headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'}

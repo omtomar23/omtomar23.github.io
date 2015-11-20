@@ -40,8 +40,8 @@
         function SetCredentials(userdata) {
             $rootScope.globals = {
                 currentUser: {
-                    userid: userdata.userid,
-                    authdata: userdata.authdata,
+                    //userid: userdata.userid,
+                    //authdata: userdata.authdata,
                     firstname:userdata.firstname,
                     lastname:userdata.lastname
                 }
