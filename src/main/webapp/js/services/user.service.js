@@ -12,6 +12,7 @@
         service.Create = Create;
         service.AddTeam = AddTeam;
         service.Login = Login;
+        service.CreateUser = CreateUser;
         service.fanOf = [];
         service.UpdateFanData = UpdateFanData;
         //UpdateFanData();
@@ -69,6 +70,16 @@
             }).then(handleSuccess, handleError('Error creating user'));
         }
 
+        function CreateUser(firstName, lastName, emailId, password, confirmPassword) {
+            return $http({
+                url: '/tailerManager/userEngineeringRequest',
+                method: 'POST',
+                data: $.param({"command":"createUser","firstName":firstName,"lastName":lastName,
+                	"emailId":emailId,"password":password, "confirmPassword":confirmPassword}),
+                headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'}
+            }).then(handleSuccess, handleError('Error creating user'));
+        }
+        
         function Login(emailId,password) {
             return $http({
                 url: '/tailerManager/login',

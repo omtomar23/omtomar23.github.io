@@ -12,18 +12,19 @@ import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.tgts.servlets.persistence.FilePersistenceService;
+import com.tgts.servlets.userengineering.AuthenticationFailedException;
+import com.tgts.servlets.userengineering.AuthenticationManager;
+import com.tgts.servlets.userengineering.UserCredential;
+import com.tgts.servlets.userengineering.UserLoginResult;
+
 /**
  * 
- * @author Om
- *
  */
 public class AuthenticationServlet extends HttpServlet
 {
-	private static final long serialVersionUID = 1L;
 	private static final Logger logger = Logger.getLogger(AuthenticationServlet.class);
-	private static final String SUCCESS = "success";
-	private static final String MESSAGE = "message";
-	private static final String STEP = "step";
+	private static final long serialVersionUID = 1L;
 	 /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
@@ -48,23 +49,39 @@ public class AuthenticationServlet extends HttpServlet
         JSONObject jsonResponse = new JSONObject();
         response.setContentType("application/json");
         
-        
+        System.out.println("ENter---"+ request.getParameter(TailerAppUtil.COMMAND));
         try
         {
-            JSONObject json = new JSONObject(request.getParameter("payload"));
-            if (request.getParameter(TgtsUtil.COMMAND).equals("login"))
+            if (request.getParameter(TailerAppUtil.COMMAND).equals("login"))
             {
-            	boolean result = validateAndLogin(json);
-                jsonResponse.put(SUCCESS, result);
-                jsonResponse.put(STEP, 2);
-                JSONObject userData = new JSONObject();
-                userData.put(TgtsUtil.FIRST_NAME, json.getString("Om").trim());
-                userData.put(TgtsUtil.LAST_NAME, json.getString("Singh").trim());
+            	try
+            	{
+            		UserLoginResult result = validateAndLogin(request);
+            		if(result.getResult())
+            		{
+            			jsonResponse.put(TailerAppUtil.SUCCESS, result.getResult());
+                        jsonResponse.put(TailerAppUtil.STEP, 2);
+                        JSONObject userData = new JSONObject();
+                        userData.put(TailerAppUtil.FIRST_NAME, result.getFirstName());
+                        userData.put(TailerAppUtil.LAST_NAME, result.getLastName());
+                        
+                        jsonResponse.put(TailerAppUtil.USER_DATA, userData);
+            		}
+            		else
+            		{
+            			updateLoginResultWithFailed(jsonResponse, "EmailId or password is Incorrect");
+            		}
+            	}
+            	catch(AuthenticationFailedException authenticationFailedException)
+            	{
+            		logger.warn(authenticationFailedException);
+            		updateLoginResultWithFailed(jsonResponse, "EmailId or password is Incorrect");
+            	}
+            	
             }
             else
             {
-                jsonResponse.put(SUCCESS, false);
-                jsonResponse.put(MESSAGE, "invalid request");
+            	updateLoginResultWithFailed(jsonResponse, "Invalid request");
             }
         }
         catch(Exception e)
@@ -73,12 +90,13 @@ public class AuthenticationServlet extends HttpServlet
             e.printStackTrace();
             try
             {
-                jsonResponse.put(SUCCESS, false);
-                jsonResponse.put(MESSAGE, e.getMessage());
+            	updateLoginResultWithFailed(jsonResponse, e.getMessage());
+                jsonResponse.put(TailerAppUtil.SUCCESS, false);
+                jsonResponse.put(TailerAppUtil.MESSAGE, e.getMessage());
             }
             catch (JSONException e1)
             {
-                // TODO Auto-generated catch block 
+            	System.err.println("JSONException***="+e1);
             }
             
         }
@@ -88,29 +106,17 @@ public class AuthenticationServlet extends HttpServlet
             logger.info("doPost <LEAVE>");
     }
 
-    private boolean validateAndLogin(JSONObject json) throws Exception
+	private void updateLoginResultWithFailed(JSONObject jsonResponse, String message)
+			throws JSONException {
+		jsonResponse.put(TailerAppUtil.SUCCESS, false);
+		jsonResponse.put(TailerAppUtil.MESSAGE, message);
+	}
+
+    private UserLoginResult validateAndLogin(HttpServletRequest request) throws Exception
     {
-        try
-        {
-            String emailId = validateAndGet(json,"emailId");
-            String password = validateAndGet(json, "password");
-            return  new Operations().login(emailId, password);
-            
-        }
-        catch (JSONException e)
-        {
-            logger.warn("error in json parsing ",e);
-            throw new Exception("error in request parsing");
-            
-        }
-    }
-    
-    private String validateAndGet(JSONObject json,String key) throws Exception
-    {
-        String value = json.getString(key).trim();
-        if(value == null || value.equals("") )
-            throw new Exception(key + " is empty");
-        return json.getString(key);
-    }
-    
+    	String emailId = request.getParameter("emailId");
+    	String password = request.getParameter("password");
+    	
+    	return new AuthenticationManager(new FilePersistenceService()).login(new UserCredential(emailId, password));
+    } 
 }

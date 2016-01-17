@@ -13,7 +13,7 @@
         service.SetCredentials = SetCredentials;
         service.SetUserFanData = SetUserFanData;
         service.ClearCredentials = ClearCredentials;
-
+        service.CreateUser = CreateUser;
         return service;
 
         function Login(emailId, password, callback) {
@@ -36,14 +36,27 @@
             //    });
 
         }
+        
+        
+        function CreateUser(firstName, lastName, emailId, password, confirmPassword,callback) {
+            $timeout(function () {
+                var response;
+                UserService.CreateUser(firstName, lastName, emailId, password, confirmPassword)
+                    .then(function (response) {
+                        callback(response);
+                    });
+            }, 10000);
+        }
+        
 
         function SetCredentials(userdata) {
             $rootScope.globals = {
                 currentUser: {
                     //userid: userdata.userid,
                     //authdata: userdata.authdata,
-                    firstname:userdata.firstname,
-                    lastname:userdata.lastname
+                	
+                	firstname:userdata.firstName,
+                	lastname:userdata.lastName
                 }
             };
             $http.defaults.headers.common['Authorization'] = 'Basic ' + userdata.authdata; // jshint ignore:line

@@ -10,6 +10,7 @@
         var vm = this;
 
         vm.login = login;
+        vm.register = register;
 
         (function initController() {
             // reset login status
@@ -20,19 +21,22 @@
             vm.dataLoading = true;
             AuthenticationService.Login(vm.emailId, vm.password, function (response) {
                 if (response.success) {
-                    AuthenticationService.SetCredentials(response.userdata);
-
                     if (response.step === 2) {
-                        AuthenticationService.SetUserFanData(response.userdata);
+                        AuthenticationService.SetCredentials(response.userData);
                         $location.path('/home');
 
                     } else
-                        $location.path('/register/step1');
+                        $location.path('/register');
                 } else {
                     FlashService.Error(response.message);
                     vm.dataLoading = false;
                 }
             });
+        };
+        
+        function register(){
+        	AuthenticationService.ClearCredentials();
+        	$location.path('/register');
         };
     }
 

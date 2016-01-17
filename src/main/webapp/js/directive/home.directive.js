@@ -9,7 +9,7 @@
         return {
             restrict : 'E',
             controller: 'HomeController',
-            templateUrl : 'template/home.view.html'
+            templateUrl : 'template/register.view.html'
         };
     }
 

@@ -7,9 +7,9 @@
 
     HeaderController.$inject = ['UserService','AuthenticationService','$location', '$rootScope','$scope'];
     function HeaderController(UserService, AuthenticationService, $location, $rootScope, $scope) {
-        var vm = this;
-        vm.user = null;
-        vm.allUsers = [];
+       var vm = this;
+       vm.user = null;
+       vm.allUsers = [];
         //$scope.firstName = $rootScope.globals.currentUser.firstname;
         $scope.logout = logout;
 

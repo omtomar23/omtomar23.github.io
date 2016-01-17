@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/tailerManager/src/generated/java" modelPluginID="tailerManager"
+    modelName="UserManagement" modelPluginClass="" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>UserManagement.ecore</foreignModel>
+  <genPackages prefix="UserManagement" basePackage="com.self.om" disposableProviderFactory="true"
+      ecorePackage="UserManagement.ecore#/">
+    <genClasses ecoreClass="UserManagement.ecore#//User">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UserManagement.ecore#//User/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UserManagement.ecore#//User/firstName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UserManagement.ecore#//User/lastName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UserManagement.ecore#//User/emailId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UserManagement.ecore#//User/password"/>
+    </genClasses>
+    <genClasses ecoreClass="UserManagement.ecore#//UserContainer">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UserManagement.ecore#//UserContainer/users"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

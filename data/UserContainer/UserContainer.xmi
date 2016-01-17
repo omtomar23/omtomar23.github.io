@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<userManagement:UserContainer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:userManagement="https://tailerManager/userManagement" xsi:schemaLocation="https://tailerManager/userManagement java://com.self.om.userManagement.UserManagementPackage">
+  <users firstName="Admin" lastName="Tailer" emailId="omtomar23@gmail.com" password="61646D696E"/>
+  <users firstName="Om" lastName="Singh" emailId="a@a" password="6F6D"/>
+  <users firstName="divya" lastName="royal" emailId="tanviroyal@gmail.com" password="7368756268"/>
+  <users firstName="a" lastName="b" emailId="a@b" password="61"/>
+</userManagement:UserContainer>

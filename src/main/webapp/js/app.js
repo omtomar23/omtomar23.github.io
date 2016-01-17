@@ -14,30 +14,14 @@
                 templateUrl: 'template/login.view.html',
                 controllerAs: 'vm'
             })
-
-            .when('/register/step0', {
-                controller: 'RegisterControllerStep0',
-                templateUrl: 'template/register.step0.view.html',
-                controllerAs: 'vm'
-            })
-            .when('/register/step1', {
-                controller: 'RegisterControllerStep1',
-                templateUrl: 'template/register.step1.view.html',
+            .when('/register', {
+                controller: 'RegisterController',
+                templateUrl: 'template/register.view.html',
                 controllerAs: 'vm'
             })
             .when('/home', {
                 controller: 'HomeController',
                 templateUrl: 'template/home.view.html',
-                controllerAs: 'vm'
-            })
-            .when('/league', {
-                controller: 'LeagueController',
-                templateUrl: 'template/league.view.html',
-                controllerAs: 'vm'
-            })
-            .when('/team/:teamid', {
-                controller: 'TeamController',
-                templateUrl: 'template/team.view.html',
                 controllerAs: 'vm'
             })
             .otherwise({ redirectTo: '/login' });
@@ -55,7 +39,7 @@
 
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
             // redirect to login page if not logged in and trying to access a restricted page
-            var restrictedPage = $.inArray($location.path(), ['/login', '/register/step0','/register/step1']) === -1;
+            var restrictedPage = $.inArray($location.path(), ['/login', '/register','/register/step1']) === -1;
             var loggedIn = $rootScope.globals.currentUser;
             if (restrictedPage && !loggedIn) {
                 $location.path('/login');

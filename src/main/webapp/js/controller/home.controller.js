@@ -8,15 +8,8 @@
     HomeController.$inject = ['UserService','AuthenticationService','$location', '$rootScope','$scope'];
     function HomeController(UserService, AuthenticationService, $location, $rootScope, $scope) {
         var vm = this;
-        vm.user = null;
-        vm.allUsers = [];
-        $scope.firstName = $rootScope.globals.currentUser.firstname;
-        $scope.lastName = $rootScope.globals.currentUser.lastname;
-
-        function logout() {
-            AuthenticationService.ClearCredentials();
-            $location.path('/login');
-        }
+        vm.firstName = $rootScope.globals.currentUser.firstname;
+        vm.lastName = $rootScope.globals.currentUser.lastname;
     }
 
 })();
