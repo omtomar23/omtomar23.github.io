@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.self.om.userManagement.UserContainer#getUsers <em>Users</em>}</li>
+ *   <li>{@link com.self.om.userManagement.UserContainer#getLastUserId <em>Last User Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -38,5 +39,31 @@ public interface UserContainer extends EObject {
 	 * @generated
 	 */
 	EList<User> getUsers();
+
+	/**
+	 * Returns the value of the '<em><b>Last User Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Last User Id</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Last User Id</em>' attribute.
+	 * @see #setLastUserId(int)
+	 * @see com.self.om.userManagement.UserManagementPackage#getUserContainer_LastUserId()
+	 * @model
+	 * @generated
+	 */
+	int getLastUserId();
+
+	/**
+	 * Sets the value of the '{@link com.self.om.userManagement.UserContainer#getLastUserId <em>Last User Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Last User Id</em>' attribute.
+	 * @see #getLastUserId()
+	 * @generated
+	 */
+	void setLastUserId(int value);
 
 } // UserContainer

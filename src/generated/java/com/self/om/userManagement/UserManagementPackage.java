@@ -149,13 +149,22 @@ public interface UserManagementPackage extends EPackage {
 	int USER_CONTAINER__USERS = 0;
 
 	/**
+	 * The feature id for the '<em><b>Last User Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_CONTAINER__LAST_USER_ID = 1;
+
+	/**
 	 * The number of structural features of the '<em>User Container</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int USER_CONTAINER_FEATURE_COUNT = 1;
+	int USER_CONTAINER_FEATURE_COUNT = 2;
 
 	/**
 	 * The number of operations of the '<em>User Container</em>' class.
@@ -254,6 +263,17 @@ public interface UserManagementPackage extends EPackage {
 	EReference getUserContainer_Users();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.self.om.userManagement.UserContainer#getLastUserId <em>Last User Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Last User Id</em>'.
+	 * @see com.self.om.userManagement.UserContainer#getLastUserId()
+	 * @see #getUserContainer()
+	 * @generated
+	 */
+	EAttribute getUserContainer_LastUserId();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -343,6 +363,14 @@ public interface UserManagementPackage extends EPackage {
 		 * @generated
 		 */
 		EReference USER_CONTAINER__USERS = eINSTANCE.getUserContainer_Users();
+
+		/**
+		 * The meta object literal for the '<em><b>Last User Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute USER_CONTAINER__LAST_USER_ID = eINSTANCE.getUserContainer_LastUserId();
 
 	}
 

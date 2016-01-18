@@ -1,5 +1,11 @@
-<div>
-<h1>Welcome in Boutique Management.</h1>
-FirstName = {{vm.firstName}}
-LastName = {{vm.lastName}}
+<div class="container">
+  <div class="jumbotron">
+    <h1>Welcome in Boutique Management!</h1> 
+  </div>
+  <ul class="nav nav-pills">
+    <li><a href="#">View All Order</a></li>
+    <li><a ng-click="vm.openOrderHandleView()" href="">Take New Order</a></li>
+    <li><a href="#">Assign Orders</a></li>
+    <li><a ng-click="vm.readAllUser()" href="">View All Tailer</a></li>
+  </ul>
 </div>

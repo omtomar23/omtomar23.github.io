@@ -1,0 +1,133 @@
+<div class="container">
+  <div class="jumbotron">
+    <h1>Welcome in Boutique Management!</h1> 
+  </div>
+  <ul class="nav nav-pills">
+    <li><a href="#">View All Order</a></li>
+    <li><a ng-click="vm.openOrderHandleView()" href="">Take New Order</a></li>
+    <li><a href="#">Assign Orders</a></li>
+    <li><a ng-click="vm.readAllUser()" href="">View All Tailer</a></li>
+  </ul>
+  <form name="form" ng-submit="vm.createOrder()" role="form">
+    
+  <div class="row">
+    <div class="col-sm-4">
+      <h3>Customer Details</h3>
+      
+    	<div class="form-group" ng-class="{ 'has-error': form.firstName.$dirty && form.firstName.$error.required }">
+            <input type="text" name="firstName" id="firstName" class="form-control" ng-model="vm.firstName" placeholder="First Name" required />
+            <span ng-show="form.firstName.$dirty && form.firstName.$error.required" class="help-block">First name is required</span>
+        </div>
+    
+   	    <div class="form-group" ng-class="{ 'has-error': form.lastName.$dirty && form.lastName.$error.required }">
+            <input type="text" name="lastName" id="lastName" class="form-control" ng-model="vm.lastName" placeholder="Last Name" required />
+            <span ng-show="form.lastName.$dirty && form.lastName.$error.required" class="help-block">Last name is required</span>
+        </div>
+    
+        <div class="form-group" ng-class="{ 'has-error': form.emailId.$dirty && form.emailId.$error.required }">
+            <input type="email" name="emailId" id="emailId" class="form-control" ng-model="vm.emailId" placeholder="Email Id" required />
+            <span ng-show="form.emailId.$dirty && form.emailId.$error.required" class="help-block">emailId is required</span>
+        </div>
+        
+        <div class="form-group" ng-class="{ 'has-error': form.address.$dirty && form.address.$error.required }">
+            <input type="text" name="address" id="address" class="form-control" ng-model="vm.address" placeholder="Address" required />
+            <span ng-show="form.address.$dirty && form.address.$error.required" class="help-block">Address is required</span>
+        </div>
+        
+         <div class="form-group" ng-class="{ 'has-error': form.phoneNo.$dirty && form.phoneNo.$error.required }">
+            <input type="text" name="phoneNo" id="phoneNo" class="form-control" ng-model="vm.phoneNo" placeholder="Phone No" required />
+            <span ng-show="form.phoneNo.$dirty && form.phoneNo.$error.required" class="help-block">Phone number is required</span>
+        </div>
+    </div>
+    
+    <div class="col-sm-4">
+      <h3>Order Details</h3>
+      
+      <div class="form-group" ng-class="{ 'has-error': form.orderDate.$dirty && form.orderDate.$error.required }">
+            <input type="date" name="orderDate" id="orderDate" class="form-control" ng-model="vm.orderDate" placeholder="Order Date" required />
+            <span ng-show="form.orderDate.$dirty && form.orderDate.$error.required" class="help-block">Order date is required</span>
+      </div>
+      
+      <div class="form-group" ng-class="{ 'has-error': form.garmentType.$dirty && form.garmentType.$error.required }">
+      
+      	<select name="garmentType" id="garmentType" ng-model="vm.data.garmentType" class="form-control" required>
+      		<option ng-repeat="option in vm.data.availableOptions" value="{{option.id}}">{{option.name}}</option>
+    	</select>
+        <span ng-show="form.garmentType.$dirty && form.garmentType.$error.required" class="help-block">Garment type is required</span>
+      </div>
+      
+	  <div class="form-group" ng-class="{ 'has-error': form.orderPrice.$dirty && form.orderPrice.$error.required }">
+            <input type="text" name="orderPrice" id="orderPrice" class="form-control" ng-model="vm.orderPrice" placeholder="Order Price" required />
+            <span ng-show="form.orderPrice.$dirty && form.orderPrice.$error.required" class="help-block">Order price is required</span>
+      </div>
+     
+    </div>
+    
+    <div class="col-sm-4">
+      <h3>Measurement Details</h3>
+      
+	  <div class="form-group" ng-class="{ 'has-error': form.shoulder.$dirty && form.shoulder.$error.required }">
+            <input type="text" name="shoulder" id="shoulder" class="form-control" ng-model="vm.shoulder" placeholder="Shoulder" required />
+            <span ng-show="form.shoulder.$dirty && form.shoulder.$error.required" class="help-block">Shoulder is required</span>
+      </div>
+      
+      <div class="form-group" ng-class="{ 'has-error': form.neckFrontLength.$dirty && form.neckFrontLength.$error.required }">
+            <input type="text" name="neckFrontLength" id="neckFrontLength" class="form-control" ng-model="vm.neckFrontLength" placeholder="Neck Front Length" required />
+            <span ng-show="form.neckFrontLength.$dirty && form.neckFrontLength.$error.required" class="help-block">Neck front length is required</span>
+      </div>
+      
+      <div class="form-group" ng-class="{ 'has-error': form.neckFrontWidth.$dirty && form.neckFrontWidth.$error.required }">
+            <input type="text" name="neckFrontWidth" id="neckFrontWidth" class="form-control" ng-model="vm.neckFrontWidth" placeholder="Neck Front Width" required />
+            <span ng-show="form.neckFrontWidth.$dirty && form.neckFrontWidth.$error.required" class="help-block">Neck front width is required</span>
+      </div>
+      
+      <div class="form-group" ng-class="{ 'has-error': form.neckBackLength.$dirty && form.neckBackLength.$error.required }">
+            <input type="text" name="neckBackLength" id="neckBackLength" class="form-control" ng-model="vm.neckBackLength" placeholder="Neck Back Length" required />
+            <span ng-show="form.neckBackLength.$dirty && form.neckBackLength.$error.required" class="help-block">Neck back length is required</span>
+      </div>
+      
+      <div class="form-group" ng-class="{ 'has-error': form.neckBackWidth.$dirty && form.neckBackWidth.$error.required }">
+            <input type="text" name="neckBackWidth" id="neckBackWidth" class="form-control" ng-model="vm.neckBackWidth" placeholder="Neck Back Width" required />
+            <span ng-show="form.neckBackWidth.$dirty && form.neckBackWidth.$error.required" class="help-block">Neck back width is required</span>
+      </div>
+      
+      <div class="form-group" ng-class="{ 'has-error': form.breast.$dirty && form.breast.$error.required }">
+            <input type="text" name="breast" id="breast" class="form-control" ng-model="vm.breast" placeholder="Breast" required />
+            <span ng-show="form.breast.$dirty && form.breast.$error.required" class="help-block">Breast length is required</span>
+      </div>
+      
+      <div class="form-group" ng-class="{ 'has-error': form.hip.$dirty && form.hip.$error.required }">
+            <input type="text" name="hip" id="hip" class="form-control" ng-model="vm.hip" placeholder="Hip" required />
+            <span ng-show="form.hip.$dirty && form.hip.$error.required" class="help-block">Hip length is required</span>
+      </div>
+      
+      <div class="form-group" ng-class="{ 'has-error': form.fullLength.$dirty && form.fullLength.$error.required }">
+            <input type="text" name="fullLength" id="fullLength" class="form-control" ng-model="vm.fullLength" placeholder="Full Length" required />
+            <span ng-show="form.fullLength.$dirty && form.fullLength.$error.required" class="help-block">Full length is required</span>
+      </div>
+      
+       <div class="form-group" ng-class="{ 'has-error': form.bottomLength.$dirty && form.bottomLength.$error.required }">
+            <input type="text" name="bottomLength" id="bottomLength" class="form-control" ng-model="vm.bottomLength" placeholder="Bottom Length" required />
+            <span ng-show="form.bottomLength.$dirty && form.bottomLength.$error.required" class="help-block">Bottom length is required</span>
+      </div>
+      
+      <div class="form-group" ng-class="{ 'has-error': form.sleeveLength.$dirty && form.sleeveLength.$error.required }">
+            <input type="text" name="sleeveLength" id="sleeveLength" class="form-control" ng-model="vm.sleeveLength" placeholder="Sleeve Length" required />
+            <span ng-show="form.sleeveLength.$dirty && form.sleeveLength.$error.required" class="help-block">Sleeve length is required</span>
+      </div>
+      
+      <div class="form-group" ng-class="{ 'has-error': form.sleeveBottom.$dirty && form.sleeveBottom.$error.required }">
+            <input type="text" name="sleeveBottom" id="sleeveBottom" class="form-control" ng-model="vm.sleeveBottom" placeholder="Sleeve Bottom" required />
+            <span ng-show="form.sleeveBottom.$dirty && form.sleeveBottom.$error.required" class="help-block">Sleeve bottom is required</span>
+      </div>
+     
+    </div>
+    
+  </div>
+  
+   <div class="form-actions">
+            <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Save</button>
+            <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        </div>
+    </form>
+</div>

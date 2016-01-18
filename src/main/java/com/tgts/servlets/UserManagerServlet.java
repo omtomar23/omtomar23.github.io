@@ -10,18 +10,24 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.LogSF;
 import org.apache.log4j.Logger;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import com.tgts.servlets.persistence.FilePersistenceService;
 import com.tgts.servlets.userengineering.CreateUserCommand;
+import com.tgts.servlets.userengineering.ReadUsersResult;
 import com.tgts.servlets.userengineering.UserEngineeringManager;
+import com.tgts.servlets.userengineering.UserEngineeringService;
 import com.tgts.servlets.userengineering.UserSignUpSchema;
 
 public class UserManagerServlet extends HttpServlet
 {
 	private static final Logger logger = Logger.getLogger(AuthenticationServlet.class);
 	private static final long serialVersionUID = 1L;
-
+	private UserEngineeringService userEngineeringService;
+	private ObjectToJSonMapper objectToJSonMapper = new ObjectToJSonMapper();
+	public UserManagerServlet()
+	{
+		userEngineeringService = new UserEngineeringManager(new FilePersistenceService());
+	}
 	 /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
@@ -34,6 +40,36 @@ public class UserManagerServlet extends HttpServlet
             logger.info("doGet <LEAVE>");
     }
     
+    private static class CommandResponse
+    {
+    	private boolean success;
+    	private int step;
+		private String message;
+    	
+    	public CommandResponse(boolean success, String message, int step)
+    	{
+    		this.success = success;
+			this.message = message;
+    		this.step = step;
+    	}
+    	
+    	@SuppressWarnings("unused")
+    	public int getStep()
+    	{
+			return step;
+		}
+    	@SuppressWarnings("unused")
+    	public boolean isSuccess()
+    	{
+			return success;
+		}
+    	@SuppressWarnings("unused")
+    	public String getMessage() 
+    	{
+			return message;
+		}
+    }
+    
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
@@ -42,22 +78,23 @@ public class UserManagerServlet extends HttpServlet
         if (logger.isInfoEnabled())
             LogSF.info(logger, "doPost <ENTER>  request = {}", request);
         
-        
-        JSONObject jsonResponse = new JSONObject();
+        String result = "";
         response.setContentType("application/json");
         
-        System.out.println("ENter---"+ request.getParameter(TailerAppUtil.COMMAND));
+        System.out.println("Inside:UserManagerServlet->Process Command="+ request.getParameter(TailerAppUtil.COMMAND));
         try
         {
             if (request.getParameter(TailerAppUtil.COMMAND).equals(TailerAppUtil.USER_CREATE))
             {
-            	boolean result = validateCreateUserCommand(request);
-                jsonResponse.put(TailerAppUtil.SUCCESS, result);
-                jsonResponse.put(TailerAppUtil.STEP, 1);
+            	result = validateCreateUserCommand(request);
+            }
+            if (request.getParameter(TailerAppUtil.COMMAND).equals(TailerAppUtil.USER_READ))
+            {
+            	result = validateReadAllUsers(request);
             }
             else
             {
-            	updateUserCUDResultWithFailed(jsonResponse, "invalid request");
+            	result = updateUserCUDResultWithFailed("invalid request");
             }
         }
         catch(Exception e)
@@ -66,7 +103,7 @@ public class UserManagerServlet extends HttpServlet
             e.printStackTrace();
             try
             {
-            	updateUserCUDResultWithFailed(jsonResponse, e.getMessage());
+            	result = updateUserCUDResultWithFailed(e.getMessage());
             }
             catch (JSONException e1)
             {
@@ -74,19 +111,18 @@ public class UserManagerServlet extends HttpServlet
             }
             
         }
-        response.getWriter().write(jsonResponse.toString());
+        response.getWriter().write(result);
 
         if (logger.isInfoEnabled())
             logger.info("doPost <LEAVE>");
     }
 
-    private void updateUserCUDResultWithFailed(JSONObject jsonResponse, String message)throws JSONException 
+    private String updateUserCUDResultWithFailed(String message)throws JSONException 
     {
-		jsonResponse.put(TailerAppUtil.SUCCESS, false);
-		jsonResponse.put(TailerAppUtil.MESSAGE, message);
+    	return objectToJSonMapper.mapObjToJSonStr(new CommandResponse(false,message, -1));
 	}
     
-    private boolean validateCreateUserCommand(HttpServletRequest request) throws Exception
+    private String validateCreateUserCommand(HttpServletRequest request) throws Exception
     {
     	String firstName = request.getParameter(UserSignUpSchema.FIRST_NAME.getSchemaName());
     	String lastName = request.getParameter(UserSignUpSchema.LAST_NAME.getSchemaName());
@@ -94,8 +130,10 @@ public class UserManagerServlet extends HttpServlet
     	String password = request.getParameter(UserSignUpSchema.PASSWORD.getSchemaName());
     	String confirmPassword = request.getParameter(UserSignUpSchema.CONFIRM_PASSWORD.getSchemaName());
     	validatePasswords(password,confirmPassword);
-    	return new UserEngineeringManager(new FilePersistenceService()).createUser(
+    	boolean result = userEngineeringService.createUser(
     			new CreateUserCommand(firstName, lastName, emailId, password));
+    	
+    	return objectToJSonMapper.mapObjToJSonStr(new CommandResponse(result, "", 1));
     }
     
     private void validatePasswords(String password, String confirmPassword) throws Exception
@@ -103,5 +141,11 @@ public class UserManagerServlet extends HttpServlet
         if(!password.equals(confirmPassword))
             throw new Exception("password doesn't match");
         
+    }
+    
+    private String validateReadAllUsers(HttpServletRequest request) throws Exception
+    {
+    	ReadUsersResult allUser = userEngineeringService.readAllUser();
+    	return objectToJSonMapper.mapObjToJSonStr(allUser);
     }
 }

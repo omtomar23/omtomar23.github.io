@@ -5,4 +5,6 @@ import com.tgts.servlets.TailerAppService;
 public interface UserEngineeringService extends TailerAppService
 {
 	boolean createUser(CreateUserCommand createUserCommand);
+	
+	ReadUsersResult readAllUser();
 }

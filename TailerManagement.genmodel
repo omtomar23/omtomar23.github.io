@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/tailerManager/src/generated/java" modelPluginID="tailerManager"
+    modelName="TailerManagement" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>TailerManagement.ecore</foreignModel>
+  <genPackages prefix="TailerManagement" basePackage="com.self.om" disposableProviderFactory="true"
+      ecorePackage="TailerManagement.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TailerManagement.ecore#//GarmentType">
+      <genEnumLiterals ecoreEnumLiteral="TailerManagement.ecore#//GarmentType/SHIRT"/>
+      <genEnumLiterals ecoreEnumLiteral="TailerManagement.ecore#//GarmentType/SUIT"/>
+      <genEnumLiterals ecoreEnumLiteral="TailerManagement.ecore#//GarmentType/KURTI"/>
+      <genEnumLiterals ecoreEnumLiteral="TailerManagement.ecore#//GarmentType/BLOUSE"/>
+      <genEnumLiterals ecoreEnumLiteral="TailerManagement.ecore#//GarmentType/COAST"/>
+      <genEnumLiterals ecoreEnumLiteral="TailerManagement.ecore#//GarmentType/PLAZZO"/>
+      <genEnumLiterals ecoreEnumLiteral="TailerManagement.ecore#//GarmentType/Pant"/>
+    </genEnums>
+    <genClasses ecoreClass="TailerManagement.ecore#//Customer">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TailerManagement.ecore#//Customer/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TailerManagement.ecore#//Customer/firstName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TailerManagement.ecore#//Customer/lastName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TailerManagement.ecore#//Customer/addess"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TailerManagement.ecore#//Customer/phoneNo"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TailerManagement.ecore#//Customer/emailId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TailerManagement.ecore#//Customer/orders"/>
+    </genClasses>
+    <genClasses ecoreClass="TailerManagement.ecore#//Order">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TailerManagement.ecore#//Order/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TailerManagement.ecore#//Order/customerId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TailerManagement.ecore#//Order/orderCreationDate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TailerManagement.ecore#//Order/orderPrice"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TailerManagement.ecore#//Order/garmentType"/>
+    </genClasses>
+    <genClasses ecoreClass="TailerManagement.ecore#//CustomerConatiner">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TailerManagement.ecore#//CustomerConatiner/customers"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TailerManagement.ecore#//CustomerConatiner/orders"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

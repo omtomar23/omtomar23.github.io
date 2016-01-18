@@ -14,4 +14,7 @@ public class TailerAppUtil
 	public static final String AUTH_DATA = "authData";
 	public static final String USER_DATA = "userData";
 	public static final String USER_CREATE = "createUser";
+	public static final String USER_READ = "readAllUser";
+	public static final String ORDER_CREATE = "createOrder";
+	
 }

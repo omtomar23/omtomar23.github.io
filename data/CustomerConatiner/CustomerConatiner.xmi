@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tailerManagement:CustomerConatiner xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tailerManagement="https://tailerManager/tailerManagement" xsi:schemaLocation="https://tailerManager/tailerManagement java://com.self.om.tailerManagement.TailerManagementPackage" lastCustomerId="2" lastOrderId="2">
+  <customers id="1" firstName="Om" lastName="Singh" addess="Sector-10" emailId="omtomar23@gmail.com">
+    <orders>1</orders>
+  </customers>
+  <customers id="2" firstName="Tanvi" lastName="Royal" addess="Sector-10" emailId="ta@s">
+    <orders>2</orders>
+  </customers>
+  <orders customerId="1" orderCreationDate="1453079274533" orderPrice="44.0" garmentType="SUIT"/>
+  <orders customerId="2" orderCreationDate="1453079328560" orderPrice="580.0" garmentType="SUIT"/>
+</tailerManagement:CustomerConatiner>

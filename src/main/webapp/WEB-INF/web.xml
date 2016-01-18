@@ -22,4 +22,12 @@
     <url-pattern>/userEngineeringRequest</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+	<servlet-name>OrderHandlerServlet</servlet-name>
+    <servlet-class>com.tgts.servlets.OrderHandlerServlet</servlet-class>
+   </servlet>
+  <servlet-mapping>
+    <servlet-name>OrderHandlerServlet</servlet-name>
+    <url-pattern>/orderRequest</url-pattern>
+  </servlet-mapping>
 </web-app>

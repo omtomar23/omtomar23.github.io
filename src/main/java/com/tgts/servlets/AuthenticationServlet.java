@@ -49,7 +49,7 @@ public class AuthenticationServlet extends HttpServlet
         JSONObject jsonResponse = new JSONObject();
         response.setContentType("application/json");
         
-        System.out.println("ENter---"+ request.getParameter(TailerAppUtil.COMMAND));
+        System.out.println("Inside:AuthenticationServlet->Process Command="+ request.getParameter(TailerAppUtil.COMMAND));
         try
         {
             if (request.getParameter(TailerAppUtil.COMMAND).equals("login"))

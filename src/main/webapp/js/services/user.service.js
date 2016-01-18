@@ -10,11 +10,12 @@
         var service = {};
         $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
         service.Create = Create;
-        service.AddTeam = AddTeam;
         service.Login = Login;
         service.CreateUser = CreateUser;
         service.fanOf = [];
         service.UpdateFanData = UpdateFanData;
+        service.CreateOrder = CreateOrder;
+        service.ReadAllUser = ReadAllUser;
         //UpdateFanData();
         return service;
 
@@ -61,15 +62,15 @@
             }).then(handleSuccess, handleError('Error creating user'));
         }
 
-        function AddTeam(userid,authData,payload) {
+        function ReadAllUser() {
             return $http({
-                url: '/tgtsfans/registeruser',
+                url: '/tailerManager/userEngineeringRequest',
                 method: 'POST',
-                data: $.param({"payload": JSON.stringify(payload),"command":"step1","userid":userid,"authdata":authData}),
+                data: $.param({"command":"readAllUser"}),
                 headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'}
-            }).then(handleSuccess, handleError('Error creating user'));
+            }).then(handleSuccess, handleError('Error reading all user'));
         }
-
+        
         function CreateUser(firstName, lastName, emailId, password, confirmPassword) {
             return $http({
                 url: '/tailerManager/userEngineeringRequest',
@@ -79,6 +80,18 @@
                 headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'}
             }).then(handleSuccess, handleError('Error creating user'));
         }
+        
+        function CreateOrder(firstName, lastName, emailId, phoneNo, address, garmentType, price ) {
+            return $http({
+                url: '/tailerManager/orderRequest',
+                method: 'POST',
+                data: $.param({"command":"createOrder","firstName":firstName,"lastName":lastName,
+                	"emailId":emailId,"phoneNo":phoneNo, "address":address,
+                	"garmentType":garmentType, "price":price}),
+                headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'}
+            }).then(handleSuccess, handleError('Error in creating order'));
+        }
+        
         
         function Login(emailId,password) {
             return $http({

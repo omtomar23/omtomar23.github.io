@@ -18,6 +18,10 @@ dependencies {
 	compile "org.eclipse.emf:org.eclipse.emf.common:2.8.0-v20120911-0500"
     compile "org.eclipse.emf:org.eclipse.emf.ecore:2.8.0-v20120911-0500"
     compile "org.eclipse.emf:org.eclipse.emf.ecore.xmi:2.8.0-v20120911-0500"
+	
+	compile "com.fasterxml.jackson.core:jackson-annotations:2.2.2"
+    compile "com.fasterxml.jackson.core:jackson-core:2.2.2"
+    compile "com.fasterxml.jackson.core:jackson-databind:2.2.2"
 
     compile "org.hibernate:hibernate-core:5.0.1.Final"
 	compile "mysql:mysql-connector-java:5.1.6"

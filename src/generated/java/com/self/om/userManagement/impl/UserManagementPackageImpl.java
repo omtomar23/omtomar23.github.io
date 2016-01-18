@@ -173,6 +173,15 @@ public class UserManagementPackageImpl extends EPackageImpl implements UserManag
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getUserContainer_LastUserId() {
+		return (EAttribute)userContainerEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public UserManagementFactory getUserManagementFactory() {
 		return (UserManagementFactory)getEFactoryInstance();
 	}
@@ -205,6 +214,7 @@ public class UserManagementPackageImpl extends EPackageImpl implements UserManag
 
 		userContainerEClass = createEClass(USER_CONTAINER);
 		createEReference(userContainerEClass, USER_CONTAINER__USERS);
+		createEAttribute(userContainerEClass, USER_CONTAINER__LAST_USER_ID);
 	}
 
 	/**
@@ -238,7 +248,7 @@ public class UserManagementPackageImpl extends EPackageImpl implements UserManag
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(userEClass, User.class, "User", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getUser_Id(), ecorePackage.getEString(), "id", null, 0, 1, User.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getUser_Id(), ecorePackage.getEInt(), "id", null, 0, 1, User.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getUser_FirstName(), ecorePackage.getEString(), "firstName", null, 0, 1, User.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getUser_LastName(), ecorePackage.getEString(), "lastName", null, 0, 1, User.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getUser_EmailId(), ecorePackage.getEString(), "emailId", null, 0, 1, User.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -246,6 +256,7 @@ public class UserManagementPackageImpl extends EPackageImpl implements UserManag
 
 		initEClass(userContainerEClass, UserContainer.class, "UserContainer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getUserContainer_Users(), this.getUser(), null, "users", null, 0, -1, UserContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getUserContainer_LastUserId(), ecorePackage.getEInt(), "lastUserId", null, 0, 1, UserContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

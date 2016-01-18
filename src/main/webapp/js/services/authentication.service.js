@@ -11,9 +11,9 @@
 
         service.Login = Login;
         service.SetCredentials = SetCredentials;
-        service.SetUserFanData = SetUserFanData;
         service.ClearCredentials = ClearCredentials;
         service.CreateUser = CreateUser;
+        service.ReadAllUser = ReadAllUser;
         return service;
 
         function Login(emailId, password, callback) {
@@ -48,6 +48,16 @@
             }, 10000);
         }
         
+        function ReadAllUser(callback) {
+            $timeout(function () {
+                var response;
+                UserService.ReadAllUser()
+                    .then(function (response) {
+                        callback(response);
+                    });
+            }, 10000);
+        }
+        
 
         function SetCredentials(userdata) {
             $rootScope.globals = {
@@ -62,14 +72,7 @@
             $http.defaults.headers.common['Authorization'] = 'Basic ' + userdata.authdata; // jshint ignore:line
             $cookieStore.put('globals', $rootScope.globals);
         }
-
-        function SetUserFanData(userdata) {
-            $rootScope.globals.currentUser.teams =userdata.teams;
-            $rootScope.globals.currentUser.tournaments =userdata.tournaments;
-            $cookieStore.put('globals', $rootScope.globals);
-            UserService.UpdateFanData();
-        }
-
+        
         function ClearCredentials() {
             console.log('clear cookie get called');
             $rootScope.globals = {};

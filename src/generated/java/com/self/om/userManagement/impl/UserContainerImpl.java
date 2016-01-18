@@ -8,6 +8,7 @@ import com.self.om.userManagement.UserManagementPackage;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -15,6 +16,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -28,6 +30,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.self.om.userManagement.impl.UserContainerImpl#getUsers <em>Users</em>}</li>
+ *   <li>{@link com.self.om.userManagement.impl.UserContainerImpl#getLastUserId <em>Last User Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -43,6 +46,25 @@ public class UserContainerImpl extends MinimalEObjectImpl.Container implements U
 	 * @ordered
 	 */
 	protected EList<User> users;
+
+	/**
+	 * The default value of the '{@link #getLastUserId() <em>Last User Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLastUserId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int LAST_USER_ID_EDEFAULT = 0;
+	/**
+	 * The cached value of the '{@link #getLastUserId() <em>Last User Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLastUserId()
+	 * @generated
+	 * @ordered
+	 */
+	protected int lastUserId = LAST_USER_ID_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -80,6 +102,27 @@ public class UserContainerImpl extends MinimalEObjectImpl.Container implements U
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public int getLastUserId() {
+		return lastUserId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLastUserId(int newLastUserId) {
+		int oldLastUserId = lastUserId;
+		lastUserId = newLastUserId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, UserManagementPackage.USER_CONTAINER__LAST_USER_ID, oldLastUserId, lastUserId));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -99,6 +142,8 @@ public class UserContainerImpl extends MinimalEObjectImpl.Container implements U
 		switch (featureID) {
 			case UserManagementPackage.USER_CONTAINER__USERS:
 				return getUsers();
+			case UserManagementPackage.USER_CONTAINER__LAST_USER_ID:
+				return getLastUserId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -116,6 +161,9 @@ public class UserContainerImpl extends MinimalEObjectImpl.Container implements U
 				getUsers().clear();
 				getUsers().addAll((Collection<? extends User>)newValue);
 				return;
+			case UserManagementPackage.USER_CONTAINER__LAST_USER_ID:
+				setLastUserId((Integer)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -131,6 +179,9 @@ public class UserContainerImpl extends MinimalEObjectImpl.Container implements U
 			case UserManagementPackage.USER_CONTAINER__USERS:
 				getUsers().clear();
 				return;
+			case UserManagementPackage.USER_CONTAINER__LAST_USER_ID:
+				setLastUserId(LAST_USER_ID_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -145,8 +196,26 @@ public class UserContainerImpl extends MinimalEObjectImpl.Container implements U
 		switch (featureID) {
 			case UserManagementPackage.USER_CONTAINER__USERS:
 				return users != null && !users.isEmpty();
+			case UserManagementPackage.USER_CONTAINER__LAST_USER_ID:
+				return lastUserId != LAST_USER_ID_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (lastUserId: ");
+		result.append(lastUserId);
+		result.append(')');
+		return result.toString();
 	}
 
 } //UserContainerImpl
